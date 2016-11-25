@@ -12,6 +12,9 @@ public abstract class BaseBee {
     public abstract int getFullHP();
     public abstract int getDamageTaken();
     public abstract void takeDamage();
+    public final int getCurrentHealth() {
+        return healthPoints;
+    }
     public final boolean isDead() {
         return healthPoints <= 0;
     }
