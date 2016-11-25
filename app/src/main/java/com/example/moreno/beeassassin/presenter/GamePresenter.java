@@ -1,7 +1,14 @@
 package com.example.moreno.beeassassin.presenter;
 
-import com.example.moreno.beeassassin.model.BeeType;
+import android.support.annotation.NonNull;
 
+import com.example.moreno.beeassassin.model.BaseBee;
+import com.example.moreno.beeassassin.model.BeeType;
+import com.example.moreno.beeassassin.model.Drone;
+import com.example.moreno.beeassassin.model.Queen;
+import com.example.moreno.beeassassin.model.Worker;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -9,12 +16,40 @@ import java.util.Random;
  */
 
 public class GamePresenter implements IGamePresenter{
-    Random random = new Random();
-    EnemiesPresenter enemiesPresenter = new EnemiesPresenter();
+    Random random;
+    EnemiesPresenter enemiesPresenter;
+
+    public GamePresenter() {
+        random = new Random();
+        enemiesPresenter = new EnemiesPresenter(createBees());
+    }
+
+    @NonNull
+    private ArrayList<BaseBee> createBees() {
+        ArrayList<BaseBee> bees = new ArrayList<>();
+        bees.add(new Queen());
+
+        bees.add(new Worker());
+        bees.add(new Worker());
+        bees.add(new Worker());
+        bees.add(new Worker());
+        bees.add(new Worker());
+
+        bees.add(new Drone());
+        bees.add(new Drone());
+        bees.add(new Drone());
+        bees.add(new Drone());
+        bees.add(new Drone());
+        bees.add(new Drone());
+        bees.add(new Drone());
+        bees.add(new Drone());
+        return bees;
+    }
 
     @Override
     public void hit() {
-        enemiesPresenter.hit(random.nextInt(enemiesPresenter.getAliveCount()));
+        int randomBeeIndex = random.nextInt(enemiesPresenter.getAliveCount());
+        enemiesPresenter.hit(randomBeeIndex);
     }
 
     @Override

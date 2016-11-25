@@ -6,6 +6,7 @@ import com.example.moreno.beeassassin.model.BaseBee;
 import com.example.moreno.beeassassin.model.Queen;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -14,19 +15,24 @@ import org.junit.runner.RunWith;
  */
 
 public class QueenBeeTest {
+    private BaseBee queen;
+
+    @Before
+    public void init() {
+        queen = new Queen();
+    }
 
     @Test
     public void testOneHitExpectedHealthChangedAlive() {
-        BaseBee queen = new Queen();
-        queen.takeDamage();
         int expectedHealth = queen.getFullHP() - queen.getDamageTaken();
+
+        queen.takeDamage();
         Assert.assertEquals(expectedHealth, queen.getCurrentHealth());
         Assert.assertFalse(queen.isDead());
     }
 
     @Test
     public void testKillExpectedDead() {
-        BaseBee queen = new Queen();
         int hitsToKill = (queen.getFullHP() - 1)/ queen.getDamageTaken() + 1;
 
         for (int i = 0; i < hitsToKill; i++) {
@@ -38,7 +44,6 @@ public class QueenBeeTest {
 
     @Test
     public void testMaxHitsExpectedAlive() {
-        BaseBee queen = new Queen();
         int maxHits = (queen.getFullHP() - 1)/ queen.getDamageTaken();
         for (int i = 0; i < maxHits; i++) {
             queen.takeDamage();

@@ -4,6 +4,7 @@ import com.example.moreno.beeassassin.model.BaseBee;
 import com.example.moreno.beeassassin.model.Worker;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -12,9 +13,15 @@ import org.junit.Test;
 
 public class DroneBeeTest {
 
+    private BaseBee drone;
+
+    @Before
+    public void init() {
+        drone = new Drone();
+    }
+
     @Test
     public void testOneHitExpectedHealthChangedAlive() {
-        BaseBee drone = new Drone();
         drone.takeDamage();
         int expectedHealth = drone.getFullHP() - drone.getDamageTaken();
         Assert.assertEquals(expectedHealth, drone.getCurrentHealth());
@@ -23,7 +30,6 @@ public class DroneBeeTest {
 
     @Test
     public void testKillExpectedDead() {
-        BaseBee drone = new Drone();
         int hitsToKill = (drone.getFullHP() - 1)/ drone.getDamageTaken() + 1;
 
         for (int i = 0; i < hitsToKill; i++) {
@@ -35,7 +41,6 @@ public class DroneBeeTest {
 
     @Test
     public void testMaxHitsExpectedAlive() {
-        BaseBee drone = new Drone();
         int maxHits = (drone.getFullHP() - 1)/ drone.getDamageTaken();
 
         for (int i = 0; i < maxHits; i++) {
