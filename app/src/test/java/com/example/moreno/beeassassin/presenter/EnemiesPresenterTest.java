@@ -43,25 +43,6 @@ public class EnemiesPresenterTest {
     }
 
     @Test
-    public void testBuryBeeExpectedAliveLessQueenAbsent() {
-        int expectedCount = enemies.getAliveCount() - 1;
-        BaseBee queen = mockBees.get(QUEEN_INDEX);
-        enemies.bury(QUEEN_INDEX);
-        Assert.assertEquals(expectedCount, enemies.getAliveCount());
-        Assert.assertFalse(mockBees.contains(queen));
-    }
-
-    @Test
-    public void testBuryBeeIncorrectIndexesExpectedAliveSame() {
-        int expectedAlive = enemies.getAliveCount();
-        enemies.bury(-1);
-        enemies.bury(Integer.MAX_VALUE);
-
-        Assert.assertEquals(expectedAlive, enemies.getAliveCount());
-
-    }
-
-    @Test
     public void testHitBeeIncorrectIndexesExpectedFullHp() {
         enemies.hit(-1);
         enemies.hit(Integer.MAX_VALUE);
@@ -70,5 +51,19 @@ public class EnemiesPresenterTest {
             Assert.assertEquals(bee.getFullHP(), bee.getCurrentHealth());
         }
 
+    }
+
+    @Test
+    public void testKillOneBeeExpectedAliveLess() {
+        int expectedAliveAmount = enemies.getAliveCount() - 1;
+        BaseBee queen = mockBees.get(QUEEN_INDEX);
+
+        int hitsToKill = (queen.getFullHP() - 1)/ queen.getDamageTaken() + 1;
+        for (int i = 0; i < hitsToKill; i++) {
+            enemies.hit(QUEEN_INDEX);
+        }
+
+        Assert.assertEquals(expectedAliveAmount, enemies.getAliveCount());
+        Assert.assertFalse(mockBees.contains(queen));
     }
 }

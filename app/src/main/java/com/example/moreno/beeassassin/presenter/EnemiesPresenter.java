@@ -25,14 +25,6 @@ public class EnemiesPresenter implements IEnemies{
     }
 
     @Override
-    public void bury(int enemyIndex) {
-        if (enemyIndex < 0 || enemyIndex > bees.size()) {
-            return;
-        }
-        bees.remove(enemyIndex);
-    }
-
-    @Override
     public void hit(int enemyIndex) {
         if (enemyIndex < 0 || enemyIndex > bees.size()) {
             return;
@@ -45,6 +37,7 @@ public class EnemiesPresenter implements IEnemies{
             bees.remove(bee);
             if (bee.getType() == BeeType.QUEEN) {
                 //finish
+
             }
         }
 

@@ -5,7 +5,6 @@ package com.example.moreno.beeassassin.presenter;
  */
 
 public interface IEnemies {
-    void bury(int enemyIndex);
     void hit(int enemyIndex);
     int getAliveCount();
 }
