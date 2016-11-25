@@ -19,7 +19,7 @@ public class QueenBeeTest {
     public void testOneHitExpectedHealthChangedAlive() {
         BaseBee queen = new Queen();
         queen.takeDamage();
-        int expectedHealth = 92;
+        int expectedHealth = queen.getFullHP() - queen.getDamageTaken();
         Assert.assertEquals(expectedHealth, queen.getCurrentHealth());
         Assert.assertFalse(queen.isDead());
     }
@@ -27,7 +27,7 @@ public class QueenBeeTest {
     @Test
     public void testKillExpectedDead() {
         BaseBee queen = new Queen();
-        int hitsToKill = (100 - 1)/ 8 + 1;
+        int hitsToKill = (queen.getFullHP() - 1)/ queen.getDamageTaken() + 1;
 
         for (int i = 0; i < hitsToKill; i++) {
             queen.takeDamage();
@@ -39,9 +39,8 @@ public class QueenBeeTest {
     @Test
     public void testMaxHitsExpectedAlive() {
         BaseBee queen = new Queen();
-        int hitsToKill = (100 - 1) / 8;
-
-        for (int i = 0; i < hitsToKill; i++) {
+        int maxHits = (queen.getFullHP() - 1)/ queen.getDamageTaken();
+        for (int i = 0; i < maxHits; i++) {
             queen.takeDamage();
         }
 

@@ -16,7 +16,7 @@ public class DroneBeeTest {
     public void testOneHitExpectedHealthChangedAlive() {
         BaseBee drone = new Drone();
         drone.takeDamage();
-        int expectedHealth = 38;
+        int expectedHealth = drone.getFullHP() - drone.getDamageTaken();
         Assert.assertEquals(expectedHealth, drone.getCurrentHealth());
         Assert.assertFalse(drone.isDead());
     }
@@ -24,7 +24,7 @@ public class DroneBeeTest {
     @Test
     public void testKillExpectedDead() {
         BaseBee drone = new Drone();
-        int hitsToKill = (50 - 1) / 12 + 1;
+        int hitsToKill = (drone.getFullHP() - 1)/ drone.getDamageTaken() + 1;
 
         for (int i = 0; i < hitsToKill; i++) {
             drone.takeDamage();
@@ -36,9 +36,9 @@ public class DroneBeeTest {
     @Test
     public void testMaxHitsExpectedAlive() {
         BaseBee drone = new Drone();
-        int hitsToKill = (50 - 1) / 12;
+        int maxHits = (drone.getFullHP() - 1)/ drone.getDamageTaken();
 
-        for (int i = 0; i < hitsToKill; i++) {
+        for (int i = 0; i < maxHits; i++) {
             drone.takeDamage();
         }
 
