@@ -17,33 +17,11 @@ import java.util.Random;
 
 public class GamePresenter implements IGamePresenter{
     Random random;
-    EnemiesPresenter enemiesPresenter;
+    IEnemies enemiesPresenter;
 
-    public GamePresenter() {
+    public GamePresenter(IEnemies enemiesPresenter) {
         random = new Random();
-        enemiesPresenter = new EnemiesPresenter(createBees());
-    }
-
-    @NonNull
-    private ArrayList<BaseBee> createBees() {
-        ArrayList<BaseBee> bees = new ArrayList<>();
-        bees.add(new Queen());
-
-        bees.add(new Worker());
-        bees.add(new Worker());
-        bees.add(new Worker());
-        bees.add(new Worker());
-        bees.add(new Worker());
-
-        bees.add(new Drone());
-        bees.add(new Drone());
-        bees.add(new Drone());
-        bees.add(new Drone());
-        bees.add(new Drone());
-        bees.add(new Drone());
-        bees.add(new Drone());
-        bees.add(new Drone());
-        return bees;
+        this.enemiesPresenter = enemiesPresenter;
     }
 
     @Override
