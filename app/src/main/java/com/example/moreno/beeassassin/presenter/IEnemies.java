@@ -7,4 +7,5 @@ package com.example.moreno.beeassassin.presenter;
 public interface IEnemies {
     void hit(int enemyIndex);
     int getAliveCount();
+    void attachGamePresenter(IGamePresenter gamePresenter);
 }

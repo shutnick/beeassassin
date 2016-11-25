@@ -1,15 +1,9 @@
 package com.example.moreno.beeassassin.presenter;
 
-import android.util.Log;
-
 import com.example.moreno.beeassassin.model.BaseBee;
 import com.example.moreno.beeassassin.model.BeeType;
-import com.example.moreno.beeassassin.model.Drone;
-import com.example.moreno.beeassassin.model.Queen;
-import com.example.moreno.beeassassin.model.Worker;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created on 23.11.2016.
@@ -19,6 +13,7 @@ public class EnemiesPresenter implements IEnemies{
 
     public static final String TAG = EnemiesPresenter.class.getSimpleName();
     private ArrayList<BaseBee> bees;
+    private IGamePresenter gamePresenter;
 
     public EnemiesPresenter(ArrayList<BaseBee> enemies) {
         bees = enemies;
@@ -36,16 +31,18 @@ public class EnemiesPresenter implements IEnemies{
         if (bee.isDead()) {
             bees.remove(bee);
             if (bee.getType() == BeeType.QUEEN) {
-                //finish
-
+                gamePresenter.finish();
             }
         }
-
-
     }
 
     @Override
     public int getAliveCount() {
         return bees.size();
+    }
+
+    @Override
+    public void attachGamePresenter(IGamePresenter gamePresenter) {
+        this.gamePresenter = gamePresenter;
     }
 }

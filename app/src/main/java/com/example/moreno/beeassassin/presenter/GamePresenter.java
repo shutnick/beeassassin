@@ -22,6 +22,7 @@ public class GamePresenter implements IGamePresenter{
     public GamePresenter(IEnemies enemiesPresenter) {
         random = new Random();
         this.enemiesPresenter = enemiesPresenter;
+        enemiesPresenter.attachGamePresenter(this);
     }
 
     @Override
