@@ -1,5 +1,7 @@
 package com.example.moreno.beeassassin.presenter;
 
+import com.example.moreno.beeassassin.model.BeeType;
+
 /**
  * Created on 23.11.2016.
  */
@@ -7,5 +9,6 @@ package com.example.moreno.beeassassin.presenter;
 public interface IGamePresenter {
     void hit();
     void finish();
+    void onDamageDealt(BeeType type);
 
 }

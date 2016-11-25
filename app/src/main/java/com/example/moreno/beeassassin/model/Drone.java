@@ -4,9 +4,9 @@ package com.example.moreno.beeassassin.model;
  * Created on 23.11.2016.
  */
 
-public class Queen extends BaseBee {
+public class Drone extends BaseBee {
 
-    public Queen() {
+    public Drone() {
         healthPoints = getFullHP();
         takenDamage = getDamageTaken();
     }
@@ -14,17 +14,17 @@ public class Queen extends BaseBee {
 
     @Override
     public BeeType getType() {
-        return BeeType.QUEEN;
+        return BeeType.DRONE;
     }
 
     @Override
     public int getFullHP() {
-        return 100;
+        return 50;
     }
 
     @Override
     public int getDamageTaken() {
-        return 8;
+        return 12;
     }
 
     @Override
