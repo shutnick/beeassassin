@@ -7,8 +7,8 @@ package com.example.moreno.beeassassin.model;
 public class Drone extends BaseBee {
 
     public Drone() {
-        healthPoints = getFullHP();
-        takenDamage = getDamageTaken();
+        healthPoints = getType().getFullHp();
+        takenDamage = getType().getDamageTaken();
     }
 
 
@@ -17,18 +17,4 @@ public class Drone extends BaseBee {
         return BeeType.DRONE;
     }
 
-    @Override
-    public int getFullHP() {
-        return 50;
-    }
-
-    @Override
-    public int getDamageTaken() {
-        return 12;
-    }
-
-    @Override
-    public void takeDamage() {
-        healthPoints -= takenDamage;
-    }
 }

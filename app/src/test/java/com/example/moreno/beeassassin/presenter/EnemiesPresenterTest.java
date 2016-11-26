@@ -40,7 +40,7 @@ public class EnemiesPresenterTest {
     public void testHitBee() {
         enemies.hit(QUEEN_INDEX);
         BaseBee queen = mockBees.get(QUEEN_INDEX);
-        Assert.assertNotEquals(queen.getCurrentHealth(), queen.getFullHP());
+        Assert.assertNotEquals(queen.getCurrentHealth(), queen.getType().getFullHp());
     }
 
     @Test
@@ -49,7 +49,7 @@ public class EnemiesPresenterTest {
         enemies.hit(Integer.MAX_VALUE);
 
         for (BaseBee bee : mockBees) {
-            Assert.assertEquals(bee.getFullHP(), bee.getCurrentHealth());
+            Assert.assertEquals(bee.getType().getFullHp(), bee.getCurrentHealth());
         }
 
     }
@@ -59,7 +59,7 @@ public class EnemiesPresenterTest {
         int expectedAliveAmount = enemies.getAliveCount() - 1;
         BaseBee queen = mockBees.get(QUEEN_INDEX);
 
-        int hitsToKill = (queen.getFullHP() - 1)/ queen.getDamageTaken() + 1;
+        int hitsToKill = (queen.getType().getFullHp() - 1)/ queen.getType().getDamageTaken() + 1;
         for (int i = 0; i < hitsToKill; i++) {
             enemies.hit(QUEEN_INDEX);
         }

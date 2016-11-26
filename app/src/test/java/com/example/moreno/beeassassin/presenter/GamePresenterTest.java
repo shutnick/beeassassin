@@ -31,7 +31,7 @@ public class GamePresenterTest {
 
         gamePresenter.hit();
         for (BaseBee bee : mockBees) {
-            if (bee.getFullHP() != bee.getCurrentHealth()) {
+            if (bee.getType().getFullHp() != bee.getCurrentHealth()) {
                 damagedBeeCount++;
             }
         }

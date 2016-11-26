@@ -7,28 +7,13 @@ package com.example.moreno.beeassassin.model;
 public class Queen extends BaseBee {
 
     public Queen() {
-        healthPoints = getFullHP();
-        takenDamage = getDamageTaken();
+        healthPoints = getType().getFullHp();
+        takenDamage = getType().getDamageTaken();
     }
 
 
     @Override
     public BeeType getType() {
         return BeeType.QUEEN;
-    }
-
-    @Override
-    public int getFullHP() {
-        return 100;
-    }
-
-    @Override
-    public int getDamageTaken() {
-        return 8;
-    }
-
-    @Override
-    public void takeDamage() {
-        healthPoints -= takenDamage;
     }
 }

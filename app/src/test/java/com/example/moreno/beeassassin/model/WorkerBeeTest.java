@@ -24,7 +24,7 @@ public class WorkerBeeTest {
 
     @Test
     public void testOneHitExpectedHealthChangedAlive() {
-        int expectedHealth = worker.getFullHP() - worker.getDamageTaken();
+        int expectedHealth = worker.getType().getFullHp() - worker.getType().getDamageTaken();
         worker.takeDamage();
         Assert.assertEquals(expectedHealth, worker.getCurrentHealth());
         Assert.assertFalse(worker.isDead());
@@ -32,7 +32,7 @@ public class WorkerBeeTest {
 
     @Test
     public void testKillExpectedDead() {
-        int hitsToKill = (worker.getFullHP() - 1)/ worker.getDamageTaken() + 1;
+        int hitsToKill = (worker.getType().getFullHp() - 1)/ worker.getType().getDamageTaken() + 1;
 
         for (int i = 0; i < hitsToKill; i++) {
             worker.takeDamage();
@@ -43,7 +43,7 @@ public class WorkerBeeTest {
 
     @Test
     public void testMaxHitsExpectedAlive() {
-        int maxHits = (worker.getFullHP() - 1)/ worker.getDamageTaken();
+        int maxHits = (worker.getType().getFullHp() - 1)/ worker.getType().getDamageTaken();
 
         for (int i = 0; i < maxHits; i++) {
             worker.takeDamage();
