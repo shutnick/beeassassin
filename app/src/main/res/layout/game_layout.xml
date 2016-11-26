@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/root"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_horizontal">
+                android:gravity="center_horizontal"
+                android:background="@android:color/holo_orange_light"
+                android:paddingTop="50dp">
 
     <LinearLayout
         android:id="@+id/queens_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:orientation="horizontal">
@@ -20,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/queens_container"
-        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:orientation="horizontal">
@@ -32,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/workers_container"
-        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:orientation="horizontal">
@@ -44,6 +47,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hit!"
+        android:onClick="hitBee"
+        android:layout_marginBottom="10dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>
 </RelativeLayout>

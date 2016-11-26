@@ -1,5 +1,6 @@
 package com.example.moreno.beeassassin.presenter;
 
+import com.example.moreno.beeassassin.model.BaseBee;
 import com.example.moreno.beeassassin.model.BeeType;
 
 /**
@@ -9,6 +10,6 @@ import com.example.moreno.beeassassin.model.BeeType;
 public interface IGamePresenter {
     void hit();
     void finish();
-    void onDamageDealt(BeeType type);
+    void onDamageDealt(BaseBee bee, int enemyIndex);
 
 }

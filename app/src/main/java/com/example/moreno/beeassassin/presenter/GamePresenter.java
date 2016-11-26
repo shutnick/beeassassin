@@ -1,14 +1,9 @@
 package com.example.moreno.beeassassin.presenter;
 
-import android.support.annotation.NonNull;
-
 import com.example.moreno.beeassassin.model.BaseBee;
 import com.example.moreno.beeassassin.model.BeeType;
-import com.example.moreno.beeassassin.model.Drone;
-import com.example.moreno.beeassassin.model.Queen;
-import com.example.moreno.beeassassin.model.Worker;
+import com.example.moreno.beeassassin.view.IViewCallback;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -18,11 +13,13 @@ import java.util.Random;
 public class GamePresenter implements IGamePresenter{
     Random random;
     IEnemies enemiesPresenter;
+    IViewCallback viewCallback;
 
-    public GamePresenter(IEnemies enemiesPresenter) {
+    public GamePresenter(IEnemies enemiesPresenter, IViewCallback callback) {
         random = new Random();
         this.enemiesPresenter = enemiesPresenter;
         enemiesPresenter.attachGamePresenter(this);
+        viewCallback = callback;
     }
 
     @Override
@@ -37,7 +34,10 @@ public class GamePresenter implements IGamePresenter{
     }
 
     @Override
-    public void onDamageDealt(BeeType type) {
-
+    public void onDamageDealt(BaseBee bee, int enemyIndex) {
+        viewCallback.refresh(bee, enemyIndex);
+        if (bee.getType() == BeeType.QUEEN) {
+            finish();
+        }
     }
 }

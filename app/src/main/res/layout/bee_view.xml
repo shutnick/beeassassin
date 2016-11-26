@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView android:id="@+id/bee_icon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/angry_bee"/>
+
+    <ImageView android:id="@+id/bee_overlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
+    <View android:id="@+id/bee_health_status"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/bee_icon"
+        android:background="@android:color/holo_blue_light"/>
+
+    <TextView android:id="@+id/bee_health_progress"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignBaseline="@id/bee_health_status"
+        android:textSize="12sp" />
+</merge>

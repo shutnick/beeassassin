@@ -2,6 +2,7 @@ package com.example.moreno.beeassassin.presenter;
 
 import com.example.moreno.beeassassin.model.BaseBee;
 import com.example.moreno.beeassassin.model.BeeType;
+import com.example.moreno.beeassassin.view.IBeeCallback;
 
 import java.util.ArrayList;
 
@@ -13,32 +14,43 @@ public class EnemiesPresenter implements IEnemies{
 
     public static final String TAG = EnemiesPresenter.class.getSimpleName();
     private ArrayList<BaseBee> bees;
+    private ArrayList<Integer> aliveBeeIndexes;
+
     private IGamePresenter gamePresenter;
 
     public EnemiesPresenter(ArrayList<BaseBee> enemies) {
         bees = enemies;
+        saveBeeIndexes(bees);
+    }
+
+    private void saveBeeIndexes(ArrayList<BaseBee> bees) {
+        aliveBeeIndexes  = new ArrayList<>(bees.size());
+        for (int i = 0; i < bees.size(); i++) {
+            aliveBeeIndexes.add(i);
+        }
     }
 
     @Override
     public void hit(int enemyIndex) {
-        if (enemyIndex < 0 || enemyIndex > bees.size()) {
+        if (enemyIndex < 0 || enemyIndex >= aliveBeeIndexes.size()) {
             return;
         }
 
-        BaseBee bee = bees.get(enemyIndex);
+        final Integer internalBeeIndex = aliveBeeIndexes.get(enemyIndex);
+        BaseBee bee = bees.get(internalBeeIndex);
         bee.takeDamage();
 
         if (bee.isDead()) {
-            bees.remove(bee);
-            if (bee.getType() == BeeType.QUEEN) {
-                gamePresenter.finish();
-            }
+            aliveBeeIndexes.remove(enemyIndex);
+
         }
+
+       gamePresenter.onDamageDealt(bee, internalBeeIndex);
     }
 
     @Override
     public int getAliveCount() {
-        return bees.size();
+        return aliveBeeIndexes.size();
     }
 
     @Override

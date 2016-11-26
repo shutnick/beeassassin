@@ -3,7 +3,7 @@ package com.example.moreno.beeassassin.presenter;
 import com.example.moreno.beeassassin.model.BaseBee;
 import com.example.moreno.beeassassin.model.Drone;
 import com.example.moreno.beeassassin.model.Queen;
-import com.example.moreno.beeassassin.model.Worker;
+import com.example.moreno.beeassassin.stubs.StubGamePresenter;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -32,6 +32,7 @@ public class EnemiesPresenterTest {
             }
         }
         enemies = new EnemiesPresenter(mockBees);
+        enemies.attachGamePresenter(new StubGamePresenter());
     }
 
 
@@ -64,6 +65,7 @@ public class EnemiesPresenterTest {
         }
 
         Assert.assertEquals(expectedAliveAmount, enemies.getAliveCount());
-        Assert.assertFalse(mockBees.contains(queen));
+        Assert.assertTrue(queen.isDead());
     }
+
 }

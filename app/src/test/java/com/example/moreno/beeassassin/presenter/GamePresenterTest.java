@@ -1,6 +1,7 @@
 package com.example.moreno.beeassassin.presenter;
 
 import com.example.moreno.beeassassin.model.BaseBee;
+import com.example.moreno.beeassassin.stubs.StubBeeViewCallback;
 import com.example.moreno.beeassassin.util.BeeGenerator;
 
 import org.junit.Assert;
@@ -20,7 +21,7 @@ public class GamePresenterTest {
     @Before
     public void init() {
         mockBees = BeeGenerator.createBees(1, 5, 7);
-        gamePresenter = new GamePresenter(new EnemiesPresenter(mockBees));
+        gamePresenter = new GamePresenter(new EnemiesPresenter(mockBees), new StubBeeViewCallback());
     }
 
     @Test
