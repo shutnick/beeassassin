@@ -1,9 +1,13 @@
 package com.example.moreno.beeassassin.presenter;
 
+import com.example.moreno.beeassassin.config.EnemiesConfig;
 import com.example.moreno.beeassassin.model.BaseBee;
 import com.example.moreno.beeassassin.model.BeeType;
+import com.example.moreno.beeassassin.util.BeeGenerator;
 import com.example.moreno.beeassassin.view.IViewCallback;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -15,11 +19,18 @@ public class GamePresenter implements IGamePresenter{
     IEnemies enemiesPresenter;
     IViewCallback viewCallback;
 
-    public GamePresenter(IEnemies enemiesPresenter, IViewCallback callback) {
-        random = new Random();
-        this.enemiesPresenter = enemiesPresenter;
+    public GamePresenter() {
+        this(BeeGenerator.createBees(
+                EnemiesConfig.QUEENS_AMOUNT,
+                EnemiesConfig.WORKERS_AMOUNT,
+                EnemiesConfig.DRONES_AMOUNT));
+    }
+
+    public GamePresenter(ArrayList<BaseBee> bees) {
+        enemiesPresenter = new EnemiesPresenter(bees);
         enemiesPresenter.attachGamePresenter(this);
-        viewCallback = callback;
+
+        random = new Random();
     }
 
     @Override
@@ -40,4 +51,21 @@ public class GamePresenter implements IGamePresenter{
             finish();
         }
     }
+
+    @Override
+    public void restoreProgress() {
+        viewCallback.restoreViews(enemiesPresenter.getState());
+    }
+
+    @Override
+    public void onCreate(IViewCallback viewCallback) {
+        this.viewCallback = viewCallback;
+    }
+
+    @Override
+    public void onDestroy() {
+        viewCallback = null;
+    }
+
+
 }

@@ -5,6 +5,7 @@ import com.example.moreno.beeassassin.model.BeeType;
 import com.example.moreno.beeassassin.view.IBeeCallback;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created on 23.11.2016.
@@ -56,5 +57,10 @@ public class EnemiesPresenter implements IEnemies{
     @Override
     public void attachGamePresenter(IGamePresenter gamePresenter) {
         this.gamePresenter = gamePresenter;
+    }
+
+    @Override
+    public List<BaseBee> getState() {
+        return new ArrayList<>(bees);
     }
 }

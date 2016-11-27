@@ -21,7 +21,8 @@ public class GamePresenterTest {
     @Before
     public void init() {
         mockBees = BeeGenerator.createBees(1, 5, 7);
-        gamePresenter = new GamePresenter(new EnemiesPresenter(mockBees), new StubBeeViewCallback());
+        gamePresenter = new GamePresenter(mockBees);
+        gamePresenter.onCreate(new StubBeeViewCallback());
     }
 
     @Test
