@@ -8,9 +8,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.moreno.beeassassin.R;
-import com.example.moreno.beeassassin.config.EnemiesConfig;
 import com.example.moreno.beeassassin.model.BaseBee;
-import com.example.moreno.beeassassin.model.BeeType;
+import com.example.moreno.beeassassin.presenter.EnemiesAdapter;
 import com.example.moreno.beeassassin.presenter.GamePresenter;
 import com.example.moreno.beeassassin.presenter.IGamePresenter;
 import com.example.moreno.beeassassin.presenter.PresenterStateSaver;
@@ -24,12 +23,12 @@ import java.util.List;
 public class GameActivity extends FragmentActivity implements IViewCallback{
     private IGamePresenter gamePresenter;
     private View hitButton;
+    private EnemiesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_layout);
-        initViews();
 
         final Fragment stateFragment = getSupportFragmentManager()
                 .findFragmentByTag(PresenterStateSaver.TAG);
@@ -43,8 +42,9 @@ public class GameActivity extends FragmentActivity implements IViewCallback{
         } else {
             gamePresenter = ((PresenterStateSaver) stateFragment).getGamePresenter();
             gamePresenter.onCreate(this);
-            gamePresenter.restoreProgress();
         }
+        adapter = gamePresenter.createAdapter();
+        initViews();
     }
 
     @Override
@@ -65,9 +65,27 @@ public class GameActivity extends FragmentActivity implements IViewCallback{
                 return true;
             }
         });
-        initBeeLayer((LinearLayout) findViewById(R.id.queens_container), BeeType.QUEEN, EnemiesConfig.QUEENS_AMOUNT);
-        initBeeLayer((LinearLayout) findViewById(R.id.workers_container), BeeType.WORKER, EnemiesConfig.WORKERS_AMOUNT);
-        initBeeLayer((LinearLayout) findViewById(R.id.drones_container), BeeType.DRONE, EnemiesConfig.DRONES_AMOUNT);
+
+        LinearLayout queenLayer = (LinearLayout) findViewById(R.id.queens_container);
+        LinearLayout workerLayer = (LinearLayout) findViewById(R.id.workers_container);
+        LinearLayout droneLayer = (LinearLayout) findViewById(R.id.drones_container);
+
+        for (BaseBee bee : adapter.getItems()) {
+            BeeView view = new BeeView(this, bee.getType());
+            adapter.bindView(view);
+
+            switch (bee.getType()) {
+                case QUEEN:
+                    queenLayer.addView(view);
+                    break;
+                case WORKER:
+                    workerLayer.addView(view);
+                    break;
+                case DRONE:
+                    droneLayer.addView(view);
+                    break;
+            }
+        }
     }
 
     private void reinit() {
@@ -75,23 +93,15 @@ public class GameActivity extends FragmentActivity implements IViewCallback{
         gamePresenter = new GamePresenter();
     }
 
-    private void initBeeLayer(LinearLayout container, BeeType type, int amount) {
-        container.removeAllViews();
-        for (int i = 0; i < amount; i++) {
-            container.addView(new BeeView(this, type));
-        }
-    }
-
     @Override
-    public void refresh(BaseBee bee, int beeId) {
-        BeeView target = getBeeViewById(bee, beeId);
-        target.refresh(bee);
+    public void refresh(int beeId) {
+        adapter.onItemChanged(beeId);
     }
 
     @Override
     public void restoreViews(List<BaseBee> bees) {
         for (int i = 0; i < bees.size(); i++){
-            refresh(bees.get(i), i);
+            refresh(i);
         }
     }
 
@@ -108,23 +118,6 @@ public class GameActivity extends FragmentActivity implements IViewCallback{
             }
         });
         snackbar.show();
-    }
-
-    private BeeView getBeeViewById(BaseBee bee, int beeId) {
-        BeeView target;
-        switch (bee.getType()) {
-            case QUEEN:
-                target = (BeeView) ((LinearLayout) findViewById(R.id.queens_container)).getChildAt(beeId);
-                break;
-            case WORKER:
-                target = (BeeView) ((LinearLayout) findViewById(R.id.workers_container)).getChildAt(beeId - EnemiesConfig.QUEENS_AMOUNT);
-                break;
-            case DRONE:
-            default:
-                target = (BeeView) ((LinearLayout) findViewById(R.id.drones_container)).getChildAt(beeId - EnemiesConfig.QUEENS_AMOUNT - EnemiesConfig.WORKERS_AMOUNT);
-                break;
-        }
-        return target;
     }
 
     public void hitBee(View hitButton) {

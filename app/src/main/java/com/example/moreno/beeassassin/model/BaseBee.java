@@ -11,11 +11,14 @@ public abstract class BaseBee {
     public abstract BeeType getType();
     public void takeDamage() {
         healthPoints -= takenDamage;
+        if (healthPoints < 0) {
+            healthPoints = 0;
+        }
     }
     public final int getCurrentHealth() {
         return healthPoints;
     }
     public final boolean isDead() {
-        return healthPoints <= 0;
+        return healthPoints == 0;
     }
 }

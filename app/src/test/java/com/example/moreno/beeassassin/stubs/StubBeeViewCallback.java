@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class StubBeeViewCallback implements IViewCallback {
     @Override
-    public void refresh(BaseBee bee, int beeId) {
+    public void refresh(int beeId) {
 
     }
 

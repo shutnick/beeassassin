@@ -1,9 +1,7 @@
 package com.example.moreno.beeassassin.view;
 
 import com.example.moreno.beeassassin.model.BaseBee;
-import com.example.moreno.beeassassin.model.BeeType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +10,7 @@ import java.util.List;
 
 public interface IViewCallback {
 
-    void refresh(BaseBee bee, int beeId);
+    void refresh(int beeId);
     void restoreViews(List<BaseBee> bees);
     void showFinish();
 }
