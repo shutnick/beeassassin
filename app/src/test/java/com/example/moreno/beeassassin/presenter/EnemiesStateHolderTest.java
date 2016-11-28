@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Created by sso on 11/25/16.
  */
 
-public class EnemiesPresenterTest {
+public class EnemiesStateHolderTest {
 
     private IEnemies enemies;
     private final int QUEEN_INDEX = 3;
@@ -31,7 +31,7 @@ public class EnemiesPresenterTest {
                 mockBees.add(new Drone());
             }
         }
-        enemies = new EnemiesPresenter(mockBees);
+        enemies = new EnemiesStateHolder(mockBees);
         enemies.attachGamePresenter(new StubGamePresenter());
     }
 

@@ -1,8 +1,6 @@
 package com.example.moreno.beeassassin.presenter;
 
 import com.example.moreno.beeassassin.model.BaseBee;
-import com.example.moreno.beeassassin.model.BeeType;
-import com.example.moreno.beeassassin.view.IBeeCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,15 +9,15 @@ import java.util.List;
  * Created on 23.11.2016.
  */
 
-public class EnemiesPresenter implements IEnemies{
+public class EnemiesStateHolder implements IEnemies{
 
-    public static final String TAG = EnemiesPresenter.class.getSimpleName();
+    public static final String TAG = EnemiesStateHolder.class.getSimpleName();
     private ArrayList<BaseBee> bees;
     private ArrayList<Integer> aliveBeeIndexes;
 
     private IGamePresenter gamePresenter;
 
-    public EnemiesPresenter(ArrayList<BaseBee> enemies) {
+    public EnemiesStateHolder(ArrayList<BaseBee> enemies) {
         bees = enemies;
         saveBeeIndexes(bees);
     }

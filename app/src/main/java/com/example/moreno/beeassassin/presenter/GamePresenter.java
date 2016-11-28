@@ -7,7 +7,6 @@ import com.example.moreno.beeassassin.util.BeeGenerator;
 import com.example.moreno.beeassassin.view.IViewCallback;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -27,7 +26,7 @@ public class GamePresenter implements IGamePresenter{
     }
 
     public GamePresenter(ArrayList<BaseBee> bees) {
-        enemiesPresenter = new EnemiesPresenter(bees);
+        enemiesPresenter = new EnemiesStateHolder(bees);
         enemiesPresenter.attachGamePresenter(this);
 
         random = new Random();
