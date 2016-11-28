@@ -18,4 +18,9 @@ public class StubBeeViewCallback implements IViewCallback {
     public void restoreViews(List<BaseBee> bees) {
 
     }
+
+    @Override
+    public void showFinish() {
+
+    }
 }

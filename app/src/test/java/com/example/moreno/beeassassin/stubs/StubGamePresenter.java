@@ -1,6 +1,7 @@
 package com.example.moreno.beeassassin.stubs;
 
 import com.example.moreno.beeassassin.model.BaseBee;
+import com.example.moreno.beeassassin.presenter.EnemiesAdapter;
 import com.example.moreno.beeassassin.presenter.IGamePresenter;
 import com.example.moreno.beeassassin.view.IViewCallback;
 
@@ -14,17 +15,7 @@ public class StubGamePresenter implements IGamePresenter {
     }
 
     @Override
-    public void finish() {
-
-    }
-
-    @Override
     public void onDamageDealt(BaseBee bee, int enemyIndex) {
-
-    }
-
-    @Override
-    public void restoreProgress() {
 
     }
 
@@ -36,5 +27,10 @@ public class StubGamePresenter implements IGamePresenter {
     @Override
     public void onDestroy() {
 
+    }
+
+    @Override
+    public EnemiesAdapter createAdapter() {
+        return null;
     }
 }
