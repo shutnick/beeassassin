@@ -110,6 +110,7 @@ public class BeeView extends RelativeLayout {
 
 
     public void refresh(final BaseBee bee) {
+        //TODO link with ViewHolder pattern
         beeOverlay.animate()
                 .setInterpolator(new DecelerateInterpolator())
                 .setDuration(200)

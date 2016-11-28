@@ -37,7 +37,7 @@ public class EnemiesPresenter implements IEnemies{
             return;
         }
 
-        final Integer internalBeeIndex = aliveBeeIndexes.get(enemyIndex);
+        int internalBeeIndex = aliveBeeIndexes.get(enemyIndex);
         BaseBee bee = bees.get(internalBeeIndex);
         bee.takeDamage();
 

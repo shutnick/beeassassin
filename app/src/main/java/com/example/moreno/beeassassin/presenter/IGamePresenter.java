@@ -10,7 +10,6 @@ import com.example.moreno.beeassassin.view.IViewCallback;
 
 public interface IGamePresenter {
     void hit();
-    void finish();
     void onDamageDealt(BaseBee bee, int enemyIndex);
     void restoreProgress();
     void onCreate(IViewCallback viewCallback);

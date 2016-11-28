@@ -87,6 +87,7 @@ public class GameActivity extends FragmentActivity implements IViewCallback{
         BeeView target = getBeeViewById(bee, beeId);
         target.refresh(bee);
 
+        //TODO move to presenter
         if (bee.getType() == BeeType.QUEEN && bee.isDead()) {
             hitButton.setEnabled(false);
             final Snackbar snackbar = Snackbar.make(findViewById(R.id.root), "You're done!", Snackbar.LENGTH_INDEFINITE);

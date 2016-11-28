@@ -40,16 +40,8 @@ public class GamePresenter implements IGamePresenter{
     }
 
     @Override
-    public void finish() {
-
-    }
-
-    @Override
     public void onDamageDealt(BaseBee bee, int enemyIndex) {
         viewCallback.refresh(bee, enemyIndex);
-        if (bee.getType() == BeeType.QUEEN) {
-            finish();
-        }
     }
 
     @Override
