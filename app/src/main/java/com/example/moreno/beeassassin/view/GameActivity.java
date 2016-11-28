@@ -86,22 +86,6 @@ public class GameActivity extends FragmentActivity implements IViewCallback{
     public void refresh(BaseBee bee, int beeId) {
         BeeView target = getBeeViewById(bee, beeId);
         target.refresh(bee);
-
-        //TODO move to presenter
-        if (bee.getType() == BeeType.QUEEN && bee.isDead()) {
-            hitButton.setEnabled(false);
-            final Snackbar snackbar = Snackbar.make(findViewById(R.id.root), "You're done!", Snackbar.LENGTH_INDEFINITE);
-            snackbar.setAction("Restart", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    snackbar.dismiss();
-                    hitButton.setEnabled(true);
-                    reinit();
-                }
-            });
-            snackbar.show();
-        }
-
     }
 
     @Override
@@ -109,6 +93,21 @@ public class GameActivity extends FragmentActivity implements IViewCallback{
         for (int i = 0; i < bees.size(); i++){
             refresh(bees.get(i), i);
         }
+    }
+
+    @Override
+    public void showFinish() {
+        hitButton.setEnabled(false);
+        final Snackbar snackbar = Snackbar.make(findViewById(R.id.root), "You're done!", Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAction("Restart", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                snackbar.dismiss();
+                hitButton.setEnabled(true);
+                reinit();
+            }
+        });
+        snackbar.show();
     }
 
     private BeeView getBeeViewById(BaseBee bee, int beeId) {

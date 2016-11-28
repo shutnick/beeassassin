@@ -127,7 +127,7 @@ public class BeeView extends RelativeLayout {
                 final int currentHealth = bee.getCurrentHealth() > 0 ? bee.getCurrentHealth() : 0;
                 healthProgress.setText(currentHealth + "/" + bee.getType().getFullHp());
                 float healthFactor = bee.getType().getFullHp() * 1.F / bee.getCurrentHealth();
-                if (healthFactor >= 4) {
+                if (healthFactor >= 4 || healthFactor < 0) {
                     healthStatus.setBackgroundColor(Color.RED);
                 } else if (healthFactor > 1) {
                     healthStatus.setBackgroundColor(Color.GREEN);

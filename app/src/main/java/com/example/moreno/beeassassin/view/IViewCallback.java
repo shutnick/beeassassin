@@ -14,4 +14,5 @@ public interface IViewCallback {
 
     void refresh(BaseBee bee, int beeId);
     void restoreViews(List<BaseBee> bees);
+    void showFinish();
 }

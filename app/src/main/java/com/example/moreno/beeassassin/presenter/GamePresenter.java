@@ -42,6 +42,9 @@ public class GamePresenter implements IGamePresenter{
     @Override
     public void onDamageDealt(BaseBee bee, int enemyIndex) {
         viewCallback.refresh(bee, enemyIndex);
+        if (bee.getType() == BeeType.QUEEN && bee.isDead()) {
+            viewCallback.showFinish();
+        }
     }
 
     @Override
