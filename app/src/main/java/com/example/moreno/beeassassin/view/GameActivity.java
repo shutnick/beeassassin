@@ -89,8 +89,8 @@ public class GameActivity extends FragmentActivity implements IViewCallback{
     }
 
     private void reinit() {
-        initViews();
         gamePresenter = new GamePresenter();
+        initViews();
     }
 
     @Override
